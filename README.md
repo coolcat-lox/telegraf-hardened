@@ -20,8 +20,8 @@ Telegraf-hardened - Сommunity-led fork of Telegraf.js. Focusing on stability, s
 
 This fork exists and improves thanks to the amazing contributors:
 
-- **[@BataevDaniil](https://github.com/BataevDaniil)** — Architect of the `custom-fetch` feature.
-- **[@clansty](https://github.com/clansty)** — Critical JSON serialization and thumbnail fixes.
+-   **[@BataevDaniil](https://github.com/BataevDaniil)** — Architect of the `custom-fetch` feature.
+-   **[@clansty](https://github.com/clansty)** — Critical JSON serialization and thumbnail fixes.
 
 ## 🛠 Roadmap & Community Fixes
 
@@ -31,21 +31,21 @@ Check our **[Strategic Roadmap #1](https://github.com/telegraf-hardened/telegraf
 
 ### Key Improvements in this Fork already done:
 
-- 🛠 **Future:** Even stricter type validation & community-requested features.
-- ✅ **Native Telegram Stars Support (API 7.8):**
-    - Full support for digital goods, star transactions, and paid media.
-    - `sendPaidMedia()` — Send exclusive content for stars.
-    - `getStarTransactions()` — Built-in business logic for tracking star revenue.
-    - `refundStarPayment()` — Native refund support for star-based transactions.
-- ✅ **Zero-Dependency Network Layer:** Completely dropped `node-fetch` and `abort-controller`. Now using native **Node.js 18+ Fetch API** for maximum performance and security.
-- ✅ **Fail-Fast Security:** Integrated token validation and strict error handling to prevent state leaks.
-- ✅ **Community PRs:** Already merged some critical fixes from the community.
-- **New Features**
-    - **bot.validateTokenAsync()**
-      Performs an actual network request to Telegram via getMe to verify the token and pre-populate botInfo.
-      Throws a descriptive 401 Unauthorized error if the token is revoked or invalid.
-      Automatically populates bot.botInfo on success.
-- ✅ **Native SOCKS5/TOR Support:** Built-in support for SOCKS4/5 and Tor proxies using `undici` and `socks`. No more external fetch-wrappers needed.
+-   🛠 **Future:** Even stricter type validation & community-requested features.
+-   ✅ **Native Telegram Stars Support (API 7.8):**
+    -   Full support for digital goods, star transactions, and paid media.
+    -   `sendPaidMedia()` — Send exclusive content for stars.
+    -   `getStarTransactions()` — Built-in business logic for tracking star revenue.
+    -   `refundStarPayment()` — Native refund support for star-based transactions.
+-   ✅ **Zero-Dependency Network Layer:** Completely dropped `node-fetch` and `abort-controller`. Now using native **Node.js 18+ Fetch API** for maximum performance and security.
+-   ✅ **Fail-Fast Security:** Integrated token validation and strict error handling to prevent state leaks.
+-   ✅ **Community PRs:** Already merged some critical fixes from the community.
+-   **New Features**
+    -   **bot.validateTokenAsync()**
+        Performs an actual network request to Telegram via getMe to verify the token and pre-populate botInfo.
+        Throws a descriptive 401 Unauthorized error if the token is revoked or invalid.
+        Automatically populates bot.botInfo on success.
+-   ✅ **Native SOCKS5/TOR Support:** Built-in support for SOCKS4/5 and Tor proxies using `undici` and `socks`. No more external fetch-wrappers needed.
 
 **Are you a Telegraf contributor?** If your PR is ignored upstream, [resubmit it here](https://github.com/telegraf-hardened/telegraf-hardened/issues/1)!
 
@@ -55,9 +55,9 @@ Check our **[Strategic Roadmap #1](https://github.com/telegraf-hardened/telegraf
 
 #### **Telegraf Constructor (Fail-Fast Validation)**
 
-- **Change**: Added synchronous token validation directly in the constructor.
-- **Impact**: If you pass `undefined`, an empty string, or a malformed token (missing `:`), the constructor will now **throw an Error immediately**.
-- **Reason**: In original Telegraf, a bot could be instantiated with an invalid token and only fail much later during `launch()` or the first API call. We catch this at the earliest possible stage.
+-   **Change**: Added synchronous token validation directly in the constructor.
+-   **Impact**: If you pass `undefined`, an empty string, or a malformed token (missing `:`), the constructor will now **throw an Error immediately**.
+-   **Reason**: In original Telegraf, a bot could be instantiated with an invalid token and only fail much later during `launch()` or the first API call. We catch this at the earliest possible stage.
 
 ### Telegram API Methods
 
@@ -65,15 +65,15 @@ Check our **[Strategic Roadmap #1](https://github.com/telegraf-hardened/telegraf
 
 Method signature updated to align with the latest Bot API requirements.
 
-- **New parameter**: `format` (mandatory) is now required as the third argument.
-- **Before**: `telegram.setStickerSetThumbnail(name, userId, thumbnail)`
-- **After**: `telegram.setStickerSetThumbnail(name, userId, format, thumbnail)`
-- **Reason**: Telegram Bot API now strictly distinguishes between sticker formats (`static`, `animated`, `video`) for thumbnails.
+-   **New parameter**: `format` (mandatory) is now required as the third argument.
+-   **Before**: `telegram.setStickerSetThumbnail(name, userId, thumbnail)`
+-   **After**: `telegram.setStickerSetThumbnail(name, userId, format, thumbnail)`
+-   **Reason**: Telegram Bot API now strictly distinguishes between sticker formats (`static`, `animated`, `video`) for thumbnails.
 
 #### **editMessageText** (Strict Mode)
 
-- **Change**: The method now uses a Discriminated Union for parameters.
-- **Impact**: You can no longer pass both `chat_id` and `inline_message_id` simultaneously (even as `undefined`). TypeScript will now enforce either the "Chat" signature or the "Inline" signature, preventing 400 Bad Request errors at compile time.
+-   **Change**: The method now uses a Discriminated Union for parameters.
+-   **Impact**: You can no longer pass both `chat_id` and `inline_message_id` simultaneously (even as `undefined`). TypeScript will now enforce either the "Chat" signature or the "Inline" signature, preventing 400 Bad Request errors at compile time.
 
 ## Introduction
 
@@ -102,16 +102,16 @@ const bot = new Telegraf(process.env.BOT_TOKEN, {
 
 ### Features
 
-- Full [Telegram Bot API 7.8](https://core.telegram.org/bots/api) support
-- [Excellent TypeScript typings](https://github.com/telegraf-hardened/telegraf-hardened/releases/tag/v5.0.0-beta.3)
-- [Lightweight](https://packagephobia.com/result?p=telegraf-hardened,node-telegram-bot-api)
-- [AWS **λ**](https://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-handler.html)
-  / [Firebase](https://firebase.google.com/products/functions/)
-  / [Glitch](https://glitch.com/edit/#!/dashing-light)
-  / [Fly.io](https://fly.io/docs/languages-and-frameworks/node)
-  / Whatever ready
-- `http/https/fastify/Connect.js/express.js` compatible webhooks
-- Extensible
+-   Full [Telegram Bot API 7.8](https://core.telegram.org/bots/api) support
+-   [Excellent TypeScript typings](https://github.com/telegraf-hardened/telegraf-hardened/releases/tag/v5.0.0-beta.3)
+-   [Lightweight](https://packagephobia.com/result?p=telegraf-hardened,node-telegram-bot-api)
+-   [AWS **λ**](https://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-handler.html)
+    / [Firebase](https://firebase.google.com/products/functions/)
+    / [Glitch](https://glitch.com/edit/#!/dashing-light)
+    / [Fly.io](https://fly.io/docs/languages-and-frameworks/node)
+    / Whatever ready
+-   `http/https/fastify/Connect.js/express.js` compatible webhooks
+-   Extensible
 
 ## 📖 Documentation
 
@@ -340,14 +340,14 @@ import { createServer } from "https";
 createServer(tlsOptions, await bot.createWebhook({ domain: "example.com" })).listen(8443);
 ```
 
-- [AWS Lambda example integration](https://github.com/feathers-studio/telegraf-docs/tree/master/examples/functions/aws-lambda)
-- [Google Cloud Functions example integration](https://github.com/feathers-studio/telegraf-docs/blob/master/examples/functions/google-cloud-function.ts)
-- [`express` example integration](https://github.com/feathers-studio/telegraf-docs/blob/master/examples/webhook/express.ts)
-- [`fastify` example integration](https://github.com/feathers-studio/telegraf-docs/blob/master/examples/webhook/fastify.ts)
-- [`koa` example integration](https://github.com/feathers-studio/telegraf-docs/blob/master/examples/webhook/koa.ts)
-- [NestJS framework integration module](https://github.com/bukhalo/nestjs-telegraf)
-- [Cloudflare Workers integration module](https://github.com/Tsuk1ko/cfworker-middware-telegraf)
-- Use [`bot.handleUpdate`](https://telegraf.js.org/classes/Telegraf-1.html#handleupdate) to write new integrations
+-   [AWS Lambda example integration](https://github.com/feathers-studio/telegraf-docs/tree/master/examples/functions/aws-lambda)
+-   [Google Cloud Functions example integration](https://github.com/feathers-studio/telegraf-docs/blob/master/examples/functions/google-cloud-function.ts)
+-   [`express` example integration](https://github.com/feathers-studio/telegraf-docs/blob/master/examples/webhook/express.ts)
+-   [`fastify` example integration](https://github.com/feathers-studio/telegraf-docs/blob/master/examples/webhook/fastify.ts)
+-   [`koa` example integration](https://github.com/feathers-studio/telegraf-docs/blob/master/examples/webhook/koa.ts)
+-   [NestJS framework integration module](https://github.com/bukhalo/nestjs-telegraf)
+-   [Cloudflare Workers integration module](https://github.com/Tsuk1ko/cfworker-middware-telegraf)
+-   Use [`bot.handleUpdate`](https://telegraf.js.org/classes/Telegraf-1.html#handleupdate) to write new integrations
 
 ### Error handling
 
@@ -365,11 +365,11 @@ Default `bot.handleError` always rethrows. You can overwrite it using `bot.catch
 
 Supported file sources:
 
-- `Existing file_id`
-- `File path`
-- `Url`
-- `Buffer`
-- `ReadStream`
+-   `Existing file_id`
+-   `File path`
+-   `Url`
+-   `Buffer`
+-   `ReadStream`
 
 Also, you can provide an optional name of a file as `filename` when you send the file.
 
@@ -434,11 +434,11 @@ process.once('SIGTERM', () => bot.stop('SIGTERM'));
 
 With this simple ability, you can:
 
-- extract information from updates and then `await next()` to avoid disrupting other middleware,
-- like [`Composer`] and [`Router`], `await next()` for updates you don't wish to handle,
-- like [`session`] and [`Scenes`], [extend the context](#extending-context) by mutating `ctx` before `await next()`,
-- reuse [other people's code](https://www.npmjs.com/search?q=telegraf-),
-- do whatever **you** come up with!
+-   extract information from updates and then `await next()` to avoid disrupting other middleware,
+-   like [`Composer`] and [`Router`], `await next()` for updates you don't wish to handle,
+-   like [`session`] and [`Scenes`], [extend the context](#extending-context) by mutating `ctx` before `await next()`,
+-   reuse [other people's code](https://www.npmjs.com/search?q=telegraf-),
+-   do whatever **you** come up with!
 
 [`Telegraf`]: https://telegraf.js.org/classes/Telegraf-1.html
 [`Composer`]: https://telegraf.js.org/classes/Composer.html

@@ -115,8 +115,8 @@ export class Composer<C extends Context> implements MiddlewareObj<C> {
                 Filter extends tt.MessageSubType
                     ? MatchedContext<C, Filter>
                     : Filter extends tt.UpdateType | Guard<C['update']>
-                      ? FilteredContext<C, Filter>
-                      : never
+                    ? FilteredContext<C, Filter>
+                    : never
             >
         >
     ): this {

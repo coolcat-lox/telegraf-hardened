@@ -27,7 +27,7 @@ export function argsParser(
 
     function flush(to: number) {
         if (done !== to)
-            (args.push(buf + str.slice(done, to)), (inside = undefined))
+            args.push(buf + str.slice(done, to)), (inside = undefined)
         buf = ''
         done = to + 1
     }
@@ -48,7 +48,7 @@ export function argsParser(
             if (inside)
                 if (inside === char) flush(i)
                 else continue
-            else (flush(i), (inside = char))
+            else flush(i), (inside = char)
         else if (char === ' ')
             if (inside) continue
             else flush(i)
