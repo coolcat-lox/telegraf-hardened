@@ -1589,8 +1589,6 @@ const Msg: Msg = {
         return 'date' in this && this.date !== 0
     },
     has<Ks extends UnionKeys<tg.Message>[]>(this: tg.Message, ...keys: Ks): this is MaybeMessage<Keyed<tg.Message, Ks[number]>> {
-        ...keys: Ks
-    ): this is MaybeMessage<Keyed<tg.Message, Ks[number]>> {
         return keys.some(
             (key) =>
                 // @ts-expect-error TS doesn't understand key
