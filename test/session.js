@@ -219,7 +219,8 @@ test('multiple sessions can be used independently without conflict', (t) =>
                     // get different chatIds
                     .map(
                         (fixture, id) => (
-                            (fixture.message.chat.id = id), fixture
+                            (fixture.message.chat.id = id),
+                            fixture
                         )
                     )
                     .map((fixture) => bot.handleUpdate(fixture))
