@@ -1585,10 +1585,10 @@ interface Msg {
 }
 
 const Msg: Msg = {
-    isAccessible(): this is MaybeMessage<tg.Message> {
+    isAccessible(this: tg.MaybeInaccessibleMessage): this is MaybeMessage<tg.Message> {
         return 'date' in this && this.date !== 0
     },
-    has<Ks extends UnionKeys<tg.Message>[]>(
+    has<Ks extends UnionKeys<tg.Message>[]>(this: tg.Message, ...keys: Ks): this is MaybeMessage<Keyed<tg.Message, Ks[number]>> {
         ...keys: Ks
     ): this is MaybeMessage<Keyed<tg.Message, Ks[number]>> {
         return keys.some(
